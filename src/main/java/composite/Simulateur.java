@@ -19,24 +19,36 @@ import java.util.ResourceBundle;
 /** Le contrôleur de l'application */
 public class Simulateur implements Initializable {
 
-	/** Le nombre de personnes et de groupes */
+	/**
+	 * Le nombre de personnes et de groupes
+	 */
 	int nbElements;
 
-	/** Le panneau où seront dessinés/sélectionnés les personnes et les groupes */
+	/**
+	 * Le panneau où seront dessinés/sélectionnés les personnes et les groupes
+	 */
 	@FXML
 	Pane contenu;
 
-	/** L'ensemble des entités sélectionnées */
+	/**
+	 * L'ensemble des entités sélectionnées
+	 */
 	private HashSet<Entite> selection = new HashSet<>();
 
-	/** Une liste de couleurs */
-	public static final String[] COLS = new String[] { "black", "brown", "red", "orange", "yellow", "green", "blue",
-			"purple", "gray" };
+	/**
+	 * Une liste de couleurs
+	 */
+	public static final String[] COLS = new String[]{"black", "brown", "red", "orange", "yellow", "green", "blue",
+			"purple", "gray"};
 
-	/** Le générateur aléatoire pour choisir les positions et les couleurs */
+	/**
+	 * Le générateur aléatoire pour choisir les positions et les couleurs
+	 */
 	private Random hasard = new Random();
 
-	/** Prépare la vue et le modèle */
+	/**
+	 * Prépare la vue et le modèle
+	 */
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		for (int i = 0; i < 10; i++) {
@@ -44,7 +56,9 @@ public class Simulateur implements Initializable {
 		}
 	}
 
-	/** Crée une personne aléatoire et l'ajoute à la foule */
+	/**
+	 * Crée une personne aléatoire et l'ajoute à la foule
+	 */
 	public void creePersonne() {
 		double x = hasard.nextDouble() * 780 + 10;
 		double y = hasard.nextDouble() * 550 + 10;
@@ -56,7 +70,7 @@ public class Simulateur implements Initializable {
 
 	/**
 	 * Gère le clic souris pour (dé)sélectionner les personnes et les groupes.
-	 * 
+	 *
 	 * @see Node#setOnMouseClicked(EventHandler)
 	 */
 	public void mouseClicked(MouseEvent mouseEvent) {
@@ -66,11 +80,22 @@ public class Simulateur implements Initializable {
 	}
 
 	/**
-	 * Gère l'action du menu créer un groupe.
-	 * 
+	 * Gère l'action du menu Déselectionner.
+	 *
 	 * @see MenuItem#getOnAction()
 	 */
-	public void creerGroupes(ActionEvent event) {
+	public void deselectionner() {
+		for (Entite e : selection)
+			e.deselectionner();
+		selection.clear();
+	}
+
+	/**
+	 * Gère l'action du menu créer un groupe.
+	 *
+	 * @see MenuItem#getOnAction()
+	 */
+	public void creerGroupe(ActionEvent event) {
 		++nbElements;
 		Groupe grp = construireGroupe();
 		grp.setOnMouseClicked(this::mouseClicked);
@@ -79,16 +104,16 @@ public class Simulateur implements Initializable {
 
 	/**
 	 * Gère l'action du menu créer une personne.
-	 * 
+	 *
 	 * @see MenuItem#getOnAction()
 	 */
-	public void creerPersonnne(ActionEvent event) {
+	public void creerPersonne(ActionEvent event) {
 		creePersonne();
 	}
 
 	/**
 	 * Gère l'action du menu Quitter.
-	 * 
+	 *
 	 * @see MenuItem#getOnAction()
 	 */
 	public void quitter(ActionEvent event) {
@@ -97,7 +122,7 @@ public class Simulateur implements Initializable {
 
 	/**
 	 * Gère l'action du menu A Propos.
-	 * 
+	 *
 	 * @see MenuItem#getOnAction()
 	 */
 	public void aPropos(ActionEvent event) {
