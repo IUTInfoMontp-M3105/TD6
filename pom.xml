@@ -127,7 +127,7 @@
                 </execution>
             </executions>
             <configuration>
-                <mainClass>composite.Simulateur</mainClass>
+                <mainClass>composite.SimulateurDeMouvements</mainClass>
             </configuration>
         </plugin>
 
