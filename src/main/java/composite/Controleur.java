@@ -1,4 +1,4 @@
-package etud.composite;
+package composite;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
